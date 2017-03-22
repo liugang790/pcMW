@@ -1,0 +1,285 @@
+/*wb*/
+ $(".wb a").each(function(index){
+		     $(this).hover(function(){
+			       if(index==0){
+				       $(this).css({"background":"#fff"});
+				   }
+				   else if(index==1){
+				       $(this).css({"background":"#fff"});
+				   }
+				   $(this).css({"border-radius":"4"});
+				   $(this).find("span").stop();
+				   $(this).find("span").animate({'top':-29},"normal")
+			 },function(){
+			    var vs=$(this)
+				$(this).find('span').animate({"top":0},"normal",function(){vs.css({"background":"none","border-radius":"4"});
+				});
+			 })
+		 });
+
+/*导航菜单*/
+var _index=0;
+$("#Nav .mainnav ul li").hover(function(){
+	  _index=$(this).index();
+      $(this).find(".maue").show();
+},function(){
+      $(this).find(".maue").hide();
+})
+
+/*banner轮播效果*/
+var _index2=0;
+var  autoTime=null;
+$("ul.banner_list li").hover(function(){
+	    clearInterval(autoTime);
+         $(this).addClass("hover").siblings("li").removeClass("hover");
+         _index2=$(this).index();
+		 $(".f_pic li").eq(_index2).stop().fadeIn("slow").siblings("li").fadeOut();
+},function(){
+     autoPlayb();
+})
+// 下一张
+		$(".next").click(function(){
+			clearInterval(autoTime);
+			_index2++;
+			var len=$("ul.banner_list li").length;
+			if(_index2 >= len){
+				_index2 = 0;
+			}
+			// 联动小按钮
+			banfn();
+		});
+			// 上一张
+		$(".pre").click(function(){
+			clearInterval(autoTime);
+			_index2--;
+			var len=$("ul.banner_list li").length;
+			if(_index2 < 0){
+				_index2 = len - 1;
+			}
+			// 联动小按钮
+			banfn();
+		});
+
+//自动轮播
+function autoPlayb(){
+        autoTime=setInterval(function(){
+		             _index2++;
+					 var len=$("ul.banner_list li").length;
+					     if(_index2>len){
+						      _index2=0;
+						 }
+						 banfn();
+				 },3000)
+}
+autoPlayb();
+function banfn(){
+          $("ul.banner_list li").eq(_index2).addClass("hover").siblings("li").removeClass("hover");
+          $(".f_pic li").eq(_index2).stop().fadeIn("slow").siblings("li").fadeOut();
+}
+//产品展示开始
+//封装
+function fn(){
+            _index3++;	
+             if(_index3>2){  
+				     _index3=0;
+					 $("#Product .Pro_con .scroll").css("left","0px");
+                      _index3++;	
+					 $("#Product .Pro_con .scroll").stop().animate({left:-255*_index3+"px"},500) 
+			 }else{
+					  $("#Product .Pro_con .scroll").stop().animate({left:-255*_index3+"px"},500)
+					 }
+}
+//点击上一页
+var _index3=0;
+var autoTime2=null;
+$("#Product .Pro_con .pre").click(function(){
+	       clearInterval(autoTime2);
+	         fn();		
+})
+$("#Product .Pro_con .pre").mouseout(function(){
+        autoPlay2();
+})
+//点击下一页
+$("#Product .Pro_con .next").click(function(){
+	         clearInterval(autoTime2);
+	         _index3--;
+             if(_index3<0){
+				     _index3=1;
+					 $("#Product .Pro_con .scroll").css("left","-510px");
+					 $("#Product .Pro_con .scroll").stop().animate({left:-255*_index3+"px"},500)
+			 }else{
+					    $("#Product .Pro_con .scroll").stop().animate({left:-255*_index3+"px"},500)
+					 }
+})
+$("#Product .Pro_con .next").mouseout(function(){
+        autoPlay2();
+})
+
+
+var   tthis=0;
+$(" .Pro_con .scroll ul.Pro_list li").hover(function(){
+       clearInterval(autoTime2);
+	   tthis=$(this).index();
+	   $(".Pro_con .scroll ul.Pro_list li .op").eq(tthis).hide();
+},function(){
+       autoPlay2();
+	   $(".Pro_con .scroll ul.Pro_list li .op").eq(tthis).fadeIn();
+})
+//自动轮播
+function autoPlay2(){
+            autoTime2=setInterval(function(){
+			           fn();
+						},5000)
+}
+autoPlay2();
+
+
+/*我们能提供什么效果开始*/
+var _index4=0;
+$("#service .ser_con .ser_list li").hover(function(){
+	      _index4=$(this).index();
+          $("#service .ser_con .ser_list li span").eq(_index4).hide();
+		  $("#service .ser_con .ser_list li p").eq(_index4).hide();
+		  $("#service .ser_con .ser_list li .ser_nav").eq(_index4).fadeIn();
+},function(){
+          $("#service .ser_con .ser_list li span").eq(_index4).show();
+		  $("#service .ser_con .ser_list li p").eq(_index4).show();
+		  $("#service .ser_con .ser_list li .ser_nav").eq(_index4).hide();
+})
+/*我们能提供什么效果结束*/
+
+
+/*客服案例效果开始*/
+
+var  _index5=0;
+var  autoTime3=null;
+function autoPlay3(){
+    autoTime3=setInterval(function(){
+		         _index5++;
+				 if(_index5>2){
+					         _index5=1;
+							 $(".cus_scroll").css("left","0px");
+				             $(".cus_scroll").stop().animate({left:-256*_index5+"px"},500);
+				 }
+	 },5000)
+}
+ autoPlay3();
+
+//点击上一页
+  $(".cus_pre").click(function(){
+	       clearInterval(autoTime3);
+           _index5++;
+		   if(_index5>2){
+			   _index5=1;
+			   $(".cus_scroll").css("left","0px");
+		        $(".cus_scroll").stop().animate({left:-256*_index5+"px"},500);
+		   }else{
+		        $(".cus_scroll").stop().animate({left:-256*_index5+"px"},500);
+		   }
+  })
+    $(".cus_pre").mouseout(function(){
+         autoPlay3();
+  })
+    $(".cus_next").click(function(){
+	       clearInterval(autoTime3);
+           _index5--;
+		   if(_index5<0){
+			   _index5=1;
+			   $(".cus_scroll").css("left","-512px");
+		        $(".cus_scroll").stop().animate({left:-256*_index5+"px"},500);
+		   }else{
+		        $(".cus_scroll").stop().animate({left:-256*_index5+"px"},500);
+		   }
+  })
+  $(".cus_next").mouseout(function(){
+         autoPlay3();
+  })
+  var tthis1=0;
+  $(".cus_scroll ul.Pro_list li").hover(function(){
+       clearInterval(autoTime3);
+	    tthis1=$(this).index();
+	   $(".cus_scroll ul.Pro_list li .op1").eq(tthis1).hide();
+},function(){
+       autoPlay3();
+	    $(".cus_scroll ul.Pro_list li .op1").eq(tthis1).fadeIn();
+})
+/*客服案例效果结束*/
+
+
+/*回到顶部开始*/
+	// 滑动鼠标滚轮
+	function Top(tbut){
+			/*$(window).scroll(function(){
+				// 判断隐藏显示
+				if($(window).scrollTop() >= 1000){
+					$("#top").fadeIn(300);
+				} else {
+					$("#top").stop(true,true).fadeOut("300");
+				}
+			});*/
+			// 点击回到顶部时
+			$(tbut).click(function(){
+				$("html,body").animate({
+					scrollTop:0
+				},1000);
+			});
+	}
+	Top("#Float .f_list li.Top")
+/**回到顶部end*/
+
+
+/*滚动条滚动
+var index=0;
+var h=$(window).height();
+ var lastTime= new Date();//获取当前的时间
+
+                      //alert(lastTime);
+  //鼠标滚轮事件的执行
+	//event 当前事件(滚轮事件)  delta 当值1时：向上滚动  -1时:向下滚动  deltaX, deltaY分别是滚轮滚动的坐标值
+          $(document).mousewheel(function(event,delta,deltaX,deltaY){
+               if(new Date()-lastTime>1000){
+                       lastTime=new Date();
+		      //向下滚
+			  if(delta==-1){
+				   index++;
+			       //alert(index)
+				   if(index<=len-1){
+				       $("body,html").animate({"scrollTop":index*h},1000);
+				   }else{index=-1}
+			  }
+			  //向上滚
+              if(delta==1){
+				       index--;
+				 if(index>=0){
+				       $("body,html").animate({"scrollTop":index*h},1000);
+					   }else{index=0}
+				   }    
+			   }
+		  });*/
+
+/*float开始*/
+$("#Float .f_list li.cal a").hover(function(){
+       $(this).find(".ph").show();
+},function(){
+       $(this).find(".ph").hide();
+})
+
+$("#Float .f_list li.ew").hover(function(){
+       $(this).find(".er").show();
+},function(){
+       $(this).find(".er").hide();
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
